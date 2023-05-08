@@ -13,8 +13,8 @@ export const InMatch = () => {
     {id: 3, title: "Card 3"}
   ]);
 
-  const removeCard = (id) => {
-    setCards(cards.filter(card => card.id !== id));
+  const removeCard = (card) => {
+    setCards(cards.filter(c => c.id !== card.id));
   };
 
   return (
@@ -24,7 +24,7 @@ export const InMatch = () => {
 
         <Hand className="bg-purple-100 w-full">
           {cards.map(card => {
-            return (<Card key={card.id} title={card.title}/>)
+            return (<Card key={card.id} card={card}/>)
           })}
         </Hand>
 

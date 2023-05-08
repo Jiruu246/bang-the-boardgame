@@ -13,11 +13,11 @@ export const DropTarget = ({removeElement}) => {
         collect: (monitor) => ({
             isOver: !!monitor.isOver(),
         })
-    }))
+    }), [cards])
 
     const addCard = (item) => {
         setCards([...cards, {id: item.id, title: item.title}])
-        removeElement(item.id);
+        removeElement(item);
     }
 
     return (
@@ -26,7 +26,7 @@ export const DropTarget = ({removeElement}) => {
         {/* render all the cards */}
         {cards.map(item => {
             return (
-                <Card key={item.id} title={item.title}/>
+                <Card key={item.id} card={item}/>
             )
         })}
 
