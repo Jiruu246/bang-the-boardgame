@@ -36,10 +36,11 @@ export const InMatch = () => {
         </Hand> */}
 
         <div className="flex justify-around w-full gap-2">
-          <DragCompo/>
-          <DragCompo/>
-          <DragCompo/>
-          <DragCompo/>
+          {cards.map((card, index) => {
+            return(
+              <DragCompo key={card.id} id={card.id} index={index}/>
+            )
+          })}
         </div>
       </div>
     </DragDropContext>
