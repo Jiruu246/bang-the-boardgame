@@ -3,6 +3,8 @@ import { Deck } from '../Components/Deck'
 import { Card } from '../Components/Card'
 import { Hand } from '../Components/Hand'
 import { DropTarget } from '../Components/DropTarget'
+import { DragDropContext } from 'react-beautiful-dnd'
+import { DragCompo } from '../Components/DragCompo'
 
 export const InMatch = () => {
 
@@ -17,17 +19,29 @@ export const InMatch = () => {
     setCards(cards.filter(c => c.id !== card.id));
   };
 
-  return (
-      <div className='flex flex-col items-center justify-center gap-10'>
-        <Deck/>
-        <DropTarget removeElement={removeCard}/>
+  const handleDragEnd = () => {
+    // TODO: create handle
+  }
 
-        <Hand className="bg-purple-100 w-full">
+  return (
+    <DragDropContext
+      onDragEnd={handleDragEnd}>
+      <div className='flex flex-col items-center justify-center gap-10'>
+        {/* <Deck/> */}
+        {/* <DropTarget removeElement={removeCard}/> */}
+        {/* <Hand className="bg-purple-100 w-full">
           {cards.map(card => {
             return (<Card key={card.id} card={card}/>)
           })}
-        </Hand>
+        </Hand> */}
 
+        <div className="flex justify-around w-full gap-2">
+          <DragCompo/>
+          <DragCompo/>
+          <DragCompo/>
+          <DragCompo/>
+        </div>
       </div>
+    </DragDropContext>
   )
 }
