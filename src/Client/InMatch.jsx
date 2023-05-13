@@ -3,44 +3,43 @@ import { Deck } from '../Components/Deck'
 import { Card } from '../Components/Card'
 import { Hand } from '../Components/Hand'
 import { DropTarget } from '../Components/DropTarget'
-import { CardContex } from '../Components/Context/CardContexProvider'
 import { DragDropContext } from 'react-beautiful-dnd'
-
+import { DragCompo } from '../Components/DragCompo'
 
 export const InMatch = () => {
 
-  const {cards, setCards} = useContext(CardContex);
+  const [cards, setCards] = useState([
+    {id: 0, title: "card 0"},
+    {id: 1, title: "Card 1"},
+    {id: 2, title: "Card 2"},
+    {id: 3, title: "Card 3"}
+  ]);
 
-  useEffect(() => {
-    setCards( 
-      [
-      {id: 1, title: "Card 1"},
-      {id: 2, title: "Card 2"},
-      {id: 3, title: "Card 3"},
-      {id: 4, title: "Card 4"}
-      ]
-    )
+  const removeCard = (card) => {
+    setCards(cards.filter(c => c.id !== card.id));
+  };
 
-  }, [])
-
-  const handleDragEnd = (result) => {
-    //TODO: update state
+  const handleDragEnd = () => {
+    // TODO: create handle
   }
 
   return (
-    <DragDropContext onDragEnd={handleDragEnd}>
       <div className='flex flex-col items-center justify-center gap-10'>
-        <Deck/>
-        <DropTarget/>
-
-        <Hand className="bg-purple-100 w-full">
-          {cards && cards.map((card, index) => {
-            return (<Card key={card.id} card={card} index={index}/>)
+        {/* <Deck/> */}
+        {/* <DropTarget removeElement={removeCard}/> */}
+        {/* <Hand className="bg-purple-100 w-full">
+          {cards.map(card => {
+            return (<Card key={card.id} card={card}/>)
           })}
-        </Hand>
+        </Hand> */}
 
+        <div className="flex justify-around w-full gap-2">
+          {cards.map((card, index) => {
+            return(
+              <DragCompo key={card.id} id={card.id} index={index}/>
+            )
+          })}
+        </div>
       </div>
-
-    </DragDropContext>
   )
 }
