@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState, useRef } from 'react';
 import { CARD_WIDTH } from './Global';
+import { Droppable } from 'react-beautiful-dnd';
 
 export const Hand = ({className, children }) => {
 
@@ -35,9 +36,20 @@ export const Hand = ({className, children }) => {
       });
 
     return (
-        <div ref={myRef} className={`flex relative justify-around h-[256px] min-w-[200px] ${className}`}>
-            {stacked ? stackedChildren : children}
-        </div>
+        <Droppable droppableId="Hand">
+            {provided => (
+                <div 
+                    ref={provided.innerRef}
+                    // innerRef={provided.innerRef}
+                    {...provided.droppableProps}
+                    // ref={myRef} 
+                    className={`flex relative justify-around h-[256px] min-w-[200px] ${className}`}>
+                    {stacked ? stackedChildren : children}
+                    {provided.placeholder}
+                </div>
+            )}
+
+        </Droppable>
 
     )
 }
