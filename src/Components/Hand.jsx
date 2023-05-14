@@ -14,6 +14,7 @@ export const Hand = ({className, children }) => {
         if(myRef.current){
             setWidth(myRef.current.offsetWidth);
             setStacked(width / (200*numChildren) < 1);
+            console.log(stacked);
         }
     };
     
@@ -36,14 +37,15 @@ export const Hand = ({className, children }) => {
       });
 
     return (
-        <Droppable droppableId="Hand">
+        <Droppable droppableId="Hand" direction="horizontal">
             {provided => (
                 <div 
-                    ref={provided.innerRef}
-                    // innerRef={provided.innerRef}
-                    {...provided.droppableProps}
-                    // ref={myRef} 
-                    className={`flex relative justify-around h-[256px] min-w-[200px] ${className}`}>
+                    ref={el => {
+                        provided.innerRef(el)
+                        myRef.current = el
+                    }}
+                    {...provided.droppableProps} 
+                    className={`flex relative h-[256px] min-w-[200px] ${className}`}>
                     {stacked ? stackedChildren : children}
                     {provided.placeholder}
                 </div>

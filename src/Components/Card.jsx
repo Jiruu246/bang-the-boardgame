@@ -16,7 +16,9 @@ export const Card = ({className, style, card, index}) => {
   // }))
 
   return (
-    <Draggable draggableId={toString(card.id)} index={index}>
+    <Draggable 
+      draggableId={card.id} 
+      index={index}>
       {provided => (
         <div 
           {...provided.draggableProps}
