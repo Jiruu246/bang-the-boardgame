@@ -1,11 +1,19 @@
+import Player from "./Player";
+
 export const BangGame = {
-  setup: () => ({characters: [{name: "The first one"}, {name: "The Second one"}]}),
+  setup: ({ctx}) => {
+    const players = {};
+    for (let i = 0; i < ctx.numPlayers; i++) {
+      players[i] = new Player(i);
+    }
+    return { players };
+  },
 
   phases: {
     chooseChar: {
       moves: {
         chooseCard: ({G}, id) => {
-          console.log(G.characters[id]);
+          // console.log(G.characters[id].name);
         }
       },
       start: true,
@@ -20,12 +28,10 @@ export const BangGame = {
 }
 
 function setupGame() {
-  const characters= [
+  const characters = [
     {name: "The first one"},
     {name: "The Second one"}
   ]
 
-  return {
-    characters
-  }
+  return characters;
 }
