@@ -6,6 +6,7 @@ export const CardType = {
 };
 
 export const CharacterType = {
+    none: 'none',
     BartCassidy: 'Bart Cassidy',
     BlackJack: 'Black Jack',
     CalamityJanet: 'Calamity Janet',

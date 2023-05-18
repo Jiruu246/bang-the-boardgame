@@ -1,19 +1,14 @@
+import { CharacterType } from "./Cards/CardEnum";
 import Player from "./Player";
 
 export const BangGame = {
-  setup: ({ctx}) => {
-    const players = {};
-    for (let i = 0; i < ctx.numPlayers; i++) {
-      players[i] = new Player(i);
-    }
-    return { players };
-  },
+  setup: ({ctx}) => setupGame(ctx),
 
   phases: {
     chooseChar: {
       moves: {
         chooseCard: ({G}, id) => {
-          // console.log(G.characters[id].name);
+          console.log(G.characters[id].name);
         }
       },
       start: true,
@@ -27,11 +22,22 @@ export const BangGame = {
   }
 }
 
-function setupGame() {
-  const characters = [
-    {name: "The first one"},
-    {name: "The Second one"}
-  ]
+function setupGame({numPlayers}) {
+  const players = [];
 
-  return characters;
+  const characters = [
+    {name: 'first one'},
+    {name: 'second one'},
+  ];
+
+  for (let i = 0; i < numPlayers; i++) {
+    players.push({
+      character: CharacterType.none,
+    });
+  }
+
+  return {
+    characters: characters,
+    players: players,
+  };
 }
