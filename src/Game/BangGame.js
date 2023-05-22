@@ -1,24 +1,15 @@
-import { CharacterType } from "./Cards/CardEnum";
+import { CharacterType } from "./Cards/CharacterCards/CharacterEnums";
 import Player from "./Player";
+import { PChooseCharacter } from "./modules/phases/PChooseChar";
 
 export const BangGame = {
   name: 'Bang',
 
   setup: ({ctx}) => setupGame(ctx),
 
-  phases: {
-    chooseChar: {
-      moves: {
-        chooseCard: ({G, ctx, events, playerID}, id) => {
-          G.players[playerID].character = G.characterOptions[playerID][id];
-        }
-      },
 
-      onBegin: ({ctx}) => onBeginChooseChar(ctx),
-      start: true,
-      endIf: ({G}) => endChooseCharacterPhase(G),
-      next: 'draw'
-    },
+  phases: {
+    chooseChar: PChooseCharacter,
 
     draw: {
       moves: {
@@ -28,24 +19,7 @@ export const BangGame = {
   },
 
   turn: {
-    stages: {
-      prep: {
-      }
-    }
   }
-}
-
-function onBeginChooseChar(ctx) {
-  ctx.events.setActivePlayers({all: 'prep'});
-
-}
-
-function endChooseCharacterPhase({players}) {
-  for (const element of players) {
-    if (element.character == CharacterType.none)
-      return false;
-  }
-  return true;
 }
 
 function setupGame({numPlayers}) {
@@ -60,6 +34,7 @@ function setupGame({numPlayers}) {
     players.push({
       id: i.toString(),
       character: CharacterType.none,
+      health: null,
     });
   }
 

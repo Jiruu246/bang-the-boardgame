@@ -2,13 +2,21 @@ import { SocketIO } from 'boardgame.io/multiplayer';
 import { Client } from 'boardgame.io/react';
 import { TicTacToe } from '../Game/Game'
 import { TicTacToeBoard } from '../Components/Board';
+import { BangBoard } from '../Components/BangBoard'
 import { useState } from 'react';
+import { BangGame } from '../Game/BangGame';
 
-const TicTacToeClient = Client({
-    game: TicTacToe,
-    board: TicTacToeBoard,
+// const TicTacToeClient = Client({
+//     game: TicTacToe,
+//     board: TicTacToeBoard,
+//     multiplayer: SocketIO({server: 'localhost:8000'}),
+// });
+
+const BangClient = Client({
+    game: BangGame,
+    board: BangBoard,
     multiplayer: SocketIO({server: 'localhost:8000'}),
-});
+})
 
 export const GameClient = () => {
   const [playerID, setPlayerID] = useState(null);
@@ -27,7 +35,8 @@ export const GameClient = () => {
           </div>
           :
           <div>
-              <TicTacToeClient playerID={playerID} />
+              {/* <TicTacToeClient playerID={playerID} /> */}
+              {<BangClient playerID={playerID}/>}
           </div>}
 
       </div>

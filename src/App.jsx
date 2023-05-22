@@ -12,8 +12,8 @@ const App = () => {
         //     <InMatch/>
         // </CardContexProvider>
         // <LobbyClient/>
-        <TestClient/>
-        // <GameClient/>
+        // <TestClient/>
+        <GameClient/>
     )
 };
 
