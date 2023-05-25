@@ -1,9 +1,8 @@
-export default class CardAbstract {
-    constructor(cardType){
+export class CardAbstract {
+    constructor(){
         if (this.constructor === CardAbstract) {
-            throw new TypeError('Abstract class "CardAbstract" cannot be instantiated directly.'); 
+            throw new TypeError('Abstract class "CardAbstract" cannot be instantiated directly.');
         }
-        this.CardType = cardType;
     }
 
     useCard(){

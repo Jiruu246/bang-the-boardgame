@@ -1,10 +1,10 @@
-import { Character, CharacterType } from "../../Cards/CharacterCards/CharacterEnums";
+import { Character } from "../../Cards/CharacterCards/CharacterEnums";
 
 export const PChooseCharacter = {
   moves: {
     chooseCard: ({G, ctx, events, playerID}, id) => {
-      G.players[playerID].character = G.characterOptions[playerID][id];
-      G.players[playerID].health = Character[CharacterType.BartCassidy].lifePoint;
+      G.players[playerID].character = G.characterOptions[playerID][id].name;
+      G.players[playerID].health = G.characterOptions[playerID][id].lifePoint;
       //TODO: do we need endturn? or just endStage is enough?
       events.endTurn();
       events.endStage();
@@ -31,7 +31,7 @@ function onBeginChooseChar(events) {
 
 function endChooseCharacterPhase({players}) {
   for (const element of players) {
-    if (element.character == CharacterType.none)
+    if (element.character == Character.none)
       return false;
   }
   return true;

@@ -1,6 +1,9 @@
-import { CharacterType } from "./Cards/CharacterCards/CharacterEnums";
+import { Character } from "./Cards/CharacterCards/CharacterEnums";
 import Player from "./Player";
 import { PChooseCharacter } from "./modules/phases/PChooseChar";
+import { CardType } from "./Cards/CardEnum";
+import BangCard from "./Cards/ActionCards/BangCard";
+
 
 export const BangGame = {
   name: 'Bang',
@@ -13,7 +16,10 @@ export const BangGame = {
 
     draw: {
       moves: {
-        playCard: () => {}
+        playCard: () => {
+          const card = new CardType[BangCard];
+
+        }
       }
     }
   },
@@ -26,14 +32,14 @@ function setupGame({numPlayers}) {
   const players = [];
 
   const characterOptions = [
-    [CharacterType.BartCassidy, CharacterType.CalamityJanet],
-    [CharacterType.BlackJack, CharacterType.ElGringo]
+    [Character.BartCassidy, Character.CalamityJanet],
+    [Character.BlackJack, Character.ElGringo]
   ]
 
   for (let i = 0; i < numPlayers; i++) {
     players.push({
       id: i.toString(),
-      character: CharacterType.none,
+      character: Character.none,
       health: null,
     });
   }
