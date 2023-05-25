@@ -1,8 +1,9 @@
 import { Character } from "./Cards/CharacterCards/CharacterEnums";
 import Player from "./Player";
 import { PChooseCharacter } from "./modules/phases/PChooseChar";
-import { CardType } from "./Cards/CardEnum";
+import { CardClassType, CardType } from "./Cards/CardEnum";
 import BangCard from "./Cards/ActionCards/BangCard";
+import { CardAbstract } from "./Cards/CardAbstract";
 
 
 export const BangGame = {
@@ -17,7 +18,8 @@ export const BangGame = {
     draw: {
       moves: {
         playCard: () => {
-          const card = new CardType[BangCard];
+          const card = new CardClassType[CardType.Beer]();
+          card.useCard();
 
         }
       }

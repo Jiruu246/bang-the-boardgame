@@ -9,6 +9,11 @@ import BangCard from "./ActionCards/BangCard";
 import BeerCard from "./ActionCards/BeerCard";
 
 export const CardType = {
-    Bang: BangCard,
-    Beer: BeerCard
+    Bang: 'Bang',
+    Beer: 'Beer',
+}
+
+export const CardClassType = {
+    [CardType.Bang]: BangCard,
+    [CardType.Beer]: BeerCard
 }
