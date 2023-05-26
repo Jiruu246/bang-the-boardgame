@@ -1,20 +1,20 @@
 import { Character } from "../../Cards/CharacterCards/CharacterEnums";
 
 export const PChooseCharacter = {
-  moves: {
-    chooseCard: ({G, ctx, events, playerID}, id) => {
-      G.players[playerID].character = G.characterOptions[playerID][id].name;
-      G.players[playerID].health = G.characterOptions[playerID][id].lifePoint;
-      //TODO: do we need endturn? or just endStage is enough?
-      events.endTurn();
-      events.endStage();
-    }
-  },
 
   turn: {
     onBegin: ({events}) => onBeginChooseChar(events),
     stages: {
       prep: {
+        moves: {
+          chooseCard: ({G, ctx, events, playerID}, id) => {
+            G.players[playerID].character = G.characterOptions[playerID][id].name;
+            G.players[playerID].health = G.characterOptions[playerID][id].lifePoint;
+            //TODO: do we need endturn? or just endStage is enough?
+            events.endTurn();
+            events.endStage();
+          }
+        },
       }
     },
 
@@ -26,7 +26,6 @@ export const PChooseCharacter = {
 
 function onBeginChooseChar(events) {
   events.setActivePlayers({all: 'prep'});
-
 }
 
 function endChooseCharacterPhase({players}) {

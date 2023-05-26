@@ -4,7 +4,13 @@ export default class BangCard extends CardAbstract {
         super();
     }
 
-    useCard(){
+    useCard({events}){
         console.log('BangCard used');
+        events.setStage('chooseTarget');
+    }
+
+    useTarget({G}, targetId){
+        //if targetid = owner id -> false
+        G.players[targetId].health -= 1;
     }
 }

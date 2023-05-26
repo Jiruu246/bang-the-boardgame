@@ -17,10 +17,25 @@ export const BangGame = {
 
     draw: {
       moves: {
-        playCard: () => {
-          const card = new CardClassType[CardType.Beer]();
-          card.useCard();
-
+        playCard: ({G, ctx, playerID, events}, cardId) => {
+          G.activeCard = cardId;
+          const card = new CardClassType[CardType.Bang]();
+          card.useCard({G, ctx, playerID, events});
+        },
+      },
+      turn: {
+        stages: {
+          chooseTarget: {
+            moves: {
+              setTarget: ({G, events}, targetId) => {
+                //using G.activeCard here
+                const card = new CardClassType[CardType.Bang]();
+                card.useTarget({G}, targetId);
+                events.endStage();
+                console.log(targetId);
+              }
+            },
+          },
         }
       }
     }
@@ -47,6 +62,7 @@ function setupGame({numPlayers}) {
   }
 
   return {
+    activeCard: null,
     characterOptions,
     players,
   };

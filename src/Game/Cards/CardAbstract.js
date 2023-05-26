@@ -5,7 +5,8 @@ export class CardAbstract {
         }
     }
 
-    useCard(){
+    //abstract function every child class must implement
+    useCard(G, ctx, playerID, events){
         throw new Error('You have to implement the method useCard!');
     }
 }
