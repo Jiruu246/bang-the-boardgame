@@ -1,6 +1,6 @@
 import { Character } from "../../Cards/CharacterCards/CharacterEnums";
 
-export const PChooseCharacter = {
+export const PCharacterSelection = {
 
   turn: {
     onBegin: ({events}) => onBeginChooseChar(events),
@@ -21,7 +21,7 @@ export const PChooseCharacter = {
   },
   start: true,
   endIf: ({G}) => endChooseCharacterPhase(G),
-  next: 'draw'
+  next: 'InGame'
 }
 
 function onBeginChooseChar(events) {

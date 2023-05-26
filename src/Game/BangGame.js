@@ -1,9 +1,10 @@
 import { Character } from "./Cards/CharacterCards/CharacterEnums";
 import Player from "./Player";
-import { PChooseCharacter } from "./modules/phases/PChooseChar";
+import { PCharacterSelection } from "./modules/phases/PCharacterSelection";
 import { CardClassType, CardType } from "./Cards/CardEnum";
 import BangCard from "./Cards/ActionCards/BangCard";
 import { CardAbstract } from "./Cards/CardAbstract";
+import { PInGame } from "./modules/phases/PInGame";
 
 
 export const BangGame = {
@@ -11,38 +12,10 @@ export const BangGame = {
 
   setup: ({ctx}) => setupGame(ctx),
 
-
   phases: {
-    chooseChar: PChooseCharacter,
-
-    draw: {
-      moves: {
-        playCard: ({G, ctx, playerID, events}, cardId) => {
-          G.activeCard = cardId;
-          const card = new CardClassType[CardType.Bang]();
-          card.useCard({G, ctx, playerID, events});
-        },
-      },
-      turn: {
-        stages: {
-          chooseTarget: {
-            moves: {
-              setTarget: ({G, events}, targetId) => {
-                //using G.activeCard here
-                const card = new CardClassType[CardType.Bang]();
-                card.useTarget({G}, targetId);
-                events.endStage();
-                console.log(targetId);
-              }
-            },
-          },
-        }
-      }
-    }
+    CharacterSelection: PCharacterSelection,
+    InGame: PInGame,
   },
-
-  turn: {
-  }
 }
 
 function setupGame({numPlayers}) {
