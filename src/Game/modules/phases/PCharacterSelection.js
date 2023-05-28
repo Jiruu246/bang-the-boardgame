@@ -1,37 +1,46 @@
+import { INVALID_MOVE } from "boardgame.io/core";
 import { Character } from "../../Cards/CharacterCards/CharacterEnums";
 
-export const PCharacterSelection = {
+const onBeginChooseChar = ({events}) => {
+  events.setActivePlayers({all: 'prep'});
+}
 
+const chooseCharacter = ({G, ctx, events, playerID}, id) => {
+  if(id >= G.characterOptions[playerID].length){
+    return INVALID_MOVE;
+  }
+  
+  const player = G.players[playerID];
+  const character = G.characterOptions[playerID][id];
+  
+  player.character = character.name;
+  player.health =character.lifePoint;
+  events.endStage();
+}
+
+const endChooseCharacterPhase = ({G}) => {
+  for (const element of G.players) {
+    if (element.character == Character.none)
+      return false;
+  }
+  return true;
+}
+
+export const PCharacterSelection = {
+  
   turn: {
-    onBegin: ({events}) => onBeginChooseChar(events),
+    onBegin: onBeginChooseChar,
     stages: {
       prep: {
         moves: {
-          chooseCard: ({G, ctx, events, playerID}, id) => {
-            G.players[playerID].character = G.characterOptions[playerID][id].name;
-            G.players[playerID].health = G.characterOptions[playerID][id].lifePoint;
-            //TODO: do we need endturn? or just endStage is enough?
-            events.endTurn();
-            events.endStage();
-          }
+          chooseCharacter: chooseCharacter,
         },
       }
     },
 
   },
   start: true,
-  endIf: ({G}) => endChooseCharacterPhase(G),
+  endIf: endChooseCharacterPhase,
   next: 'InGame'
 }
 
-function onBeginChooseChar(events) {
-  events.setActivePlayers({all: 'prep'});
-}
-
-function endChooseCharacterPhase({players}) {
-  for (const element of players) {
-    if (element.character == Character.none)
-      return false;
-  }
-  return true;
-}

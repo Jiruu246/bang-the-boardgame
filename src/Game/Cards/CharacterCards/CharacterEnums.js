@@ -1,6 +1,4 @@
 export const Character = {
-  none: 'none',
-
   BartCassidy: {
     name: 'Bart Cassidy',
     lifePoint: 4
