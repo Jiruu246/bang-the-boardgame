@@ -1,6 +1,8 @@
 import { INVALID_MOVE } from "boardgame.io/core";
 import { Character } from "../../Cards/CharacterCards/CharacterEnums";
 
+//the stage of player is setted here
+//becasue we cannot access setStage from onBegin of a phase
 const onBeginChooseChar = ({events}) => {
   events.setActivePlayers({all: 'prep'});
 }
@@ -9,10 +11,10 @@ const chooseCharacter = ({G, ctx, events, playerID}, id) => {
   if(id >= G.characterOptions[playerID].length){
     return INVALID_MOVE;
   }
-  
+
   const player = G.players[playerID];
   const character = G.characterOptions[playerID][id];
-  
+
   player.character = character.name;
   player.health =character.lifePoint;
   events.endStage();
@@ -27,7 +29,7 @@ const endChooseCharacterPhase = ({G}) => {
 }
 
 export const PCharacterSelection = {
-  
+
   turn: {
     onBegin: onBeginChooseChar,
     stages: {
