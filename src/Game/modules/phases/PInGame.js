@@ -1,6 +1,11 @@
 import { CardClassType, CardType } from "../../Cards/CardEnum";
 
+const onBeginGame() => {
+
+}
+
 export const PInGame = {
+  onBegin: onBeginGame,
   moves: {
     playCard: ({G, ctx, playerID, events}, cardId) => {
       G.activeCard = cardId;

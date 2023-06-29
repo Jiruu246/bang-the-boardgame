@@ -1,11 +1,13 @@
 import { CardAbstract } from "../CardAbstract";
+import { CardType } from "../CardEnum";
 export default class BangCard extends CardAbstract {
     constructor(){
-        super();
+        super(CardType.Bang);
     }
 
-    useCard({events}){
+    useCard({G, events}){
         console.log('BangCard used');
+        G.activeCard = this._cardType;
         events.setStage('chooseTarget');
     }
 

@@ -8,15 +8,10 @@ const onBeginChooseChar = ({events}) => {
 }
 
 const chooseCharacter = ({G, ctx, events, playerID}, id) => {
-  if(id >= G.characterOptions[playerID].length){
+  if (!IsValidateChoosing(id, G, playerID)) {
     return INVALID_MOVE;
   }
-
-  const player = G.players[playerID];
-  const character = G.characterOptions[playerID][id];
-
-  player.character = character.name;
-  player.health =character.lifePoint;
+  setCharacter(id, G, playerID);
   events.endStage();
 }
 
@@ -37,12 +32,26 @@ export const PCharacterSelection = {
         moves: {
           chooseCharacter: chooseCharacter,
         },
-      }
+      },
     },
-
+    minMoves: 1,
   },
   start: true,
   endIf: endChooseCharacterPhase,
   next: 'InGame'
 }
 
+function IsValidateChoosing(id, G, playerID){
+  return id < G.characterOptions[playerID].length
+}
+
+function setCharacter(id, G, playerID){
+  const player = G.players[playerID];
+  const character = G.characterOptions[playerID][id];
+
+  player.character = character.name;
+  player.health = character.lifePoint;
+
+  //player get the number of card correspond to their health
+  player.hand = G.drawPile.splice(-player.health);
+}

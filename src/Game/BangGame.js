@@ -1,10 +1,8 @@
 import { Character } from "./Cards/CharacterCards/CharacterEnums";
-import Player from "./Player";
 import { PCharacterSelection } from "./modules/phases/PCharacterSelection";
-import { CardClassType, CardType } from "./Cards/CardEnum";
-import BangCard from "./Cards/ActionCards/BangCard";
-import { CardAbstract } from "./Cards/CardAbstract";
+import { CardType, NumberOfCards } from "./Cards/CardEnum";
 import { PInGame } from "./modules/phases/PInGame";
+import { v4 as uuidv4 } from 'uuid'
 
 
 export const BangGame = {
@@ -21,10 +19,22 @@ export const BangGame = {
 function setupGame({numPlayers}) {
   const OPTION_SIZE = 2;
   const players = [];
+  const characterOptions = [];
+  const cards = [];
+  const drawPile = [];
 
   const charactersPool = suffle(Object.values(Character));
 
-  const characterOptions = [];
+  for (const card in NumberOfCards) {
+    for (let i = 0; i < NumberOfCards[card]; i++){
+      cards.push({id: uuidv4(), type: CardType[card]});
+    }
+  }
+
+  cards.forEach((card) => {
+    drawPile.push({id: card.id});
+  });
+  suffle(drawPile);
 
   for (let i = 0; i < numPlayers; i++) {
     characterOptions.push(
@@ -42,6 +52,8 @@ function setupGame({numPlayers}) {
     activeCard: null,
     characterOptions,
     players,
+    cards,
+    drawPile
   };
 }
 

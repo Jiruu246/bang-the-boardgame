@@ -1,10 +1,3 @@
-// export const CardType = {
-//     Character: 'Character',
-//     Equipment: 'Equipment',
-//     Action: 'Action',
-//     Effect: 'Effect',
-// };
-
 import BangCard from "./ActionCards/BangCard";
 import BeerCard from "./ActionCards/BeerCard";
 
@@ -24,6 +17,23 @@ export const CardType = {
     Jail: 'Jail',
     Dynamite: 'Dynamite',
 };
+
+export const NumberOfCards = {
+    Bang: 24,
+    Beer: 6,
+    Missed: 12,
+    Duel: 3,
+    Indians: 3,
+    GeneralStore: 2,
+    Panic: 1,
+    CatBalou: 2,
+    Stagecoach: 2,
+    WellsFargo: 2,
+    Saloon: 1,
+    Barrel: 1,
+    Jail: 1,
+    Dynamite: 1,
+  };
 
 export const CardClassType = {
     [CardType.Bang]: BangCard,
