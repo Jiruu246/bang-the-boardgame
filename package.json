@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "serve": "node -r esm src/Game/server.cjs"
+    "serve": "node -r esm src/Game/server.js"
   },
   "dependencies": {
     "boardgame.io": "^0.50.2",
