@@ -22,7 +22,6 @@ export const PInGame = {
             return player.id;
           }
         })
-      };
 
     },
     stages: {
