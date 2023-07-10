@@ -1,5 +1,6 @@
 import { INVALID_MOVE } from "boardgame.io/core";
 import { Character } from "../../Cards/CharacterCards/CharacterEnums";
+import { Roles } from "../../Roles";
 
 //the stage of player is setted here
 //becasue we cannot access setStage from onBegin of a phase
@@ -51,6 +52,9 @@ function setCharacter(id, G, playerID){
 
   player.character = character.name;
   player.health = character.lifePoint;
+  if(player.role == Roles.SHERIFF) {
+      player.health++;
+  }
 
   //player get the number of card correspond to their health
   player.hand = G.drawPile.splice(-player.health);

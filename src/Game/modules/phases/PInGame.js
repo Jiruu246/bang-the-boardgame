@@ -1,4 +1,5 @@
 import { CardClassType, CardType } from "../../Cards/CardEnum";
+import { Roles } from "../../Roles";
 
 const onBeginGame() => {
 
@@ -14,6 +15,16 @@ export const PInGame = {
     },
   },
   turn: {
+    order: {
+      first: ({G}) => {
+        G.players.forEach(player => {
+          if (player.role === Roles.SHERIFF) {
+            return player.id;
+          }
+        })
+      };
+
+    },
     stages: {
       chooseTarget: {
         moves: {
